@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void capturar(int arreglo[], int n){
+void capturar(int arreglo[], int *n){
+    printf("Ingrese cuantos número desea agregar al arreglo: ");
+    scanf("%d", &n);
     for(int i = 0; i < n; i ++){
         printf("\nIngrese el valor %i del arreglo: ", i + 1);
         scanf("%i", &arreglo[i]);
@@ -16,30 +18,38 @@ void mostrar(int arreglo[], int n){
     }
 }
 
-void filtrar(int origen[], int destino[], int n){
-    int i, j= 0;
+void filtrar(int origen[], int destino[], int n, int *j){
+    int i;
     for(i = 0; i < n; i ++){
         if(origen[i] % 2 != 0){
-           destino[j] = origen[i];
-           j ++;
+           destino[(*j)] = origen[i];
+           (*j) ++;
         }
     }
 }
 
+void archivo(int destino[], int j){
+    int i;
+    FILE *f;
+    f = fopen("resultado.txt", "w");
+    for(i = 0; i < j; i ++){
+        fprintf(f, "%d ", destino[i]);
+    }
+    fclose(f);
+}
+
 int main()
 {
-    int n = 6, i;
+    int n = 0, j = 0;
     int array[n];
-    int d[3];
+    int d[j];
 
     capturar(array, n);
     mostrar(array, n);
     printf("\n");
-    filtrar(array, d, n);
-
-    for(i = 0; i < 3; i ++){
-        printf("%d ", d[i]);
-    }
+    filtrar(array, d, n, &j);
+    mostrar(d, j);
+    archivo(d, j);
 
 
     return 0;
