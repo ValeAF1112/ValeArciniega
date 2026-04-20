@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void capturar(int arreglo[], int *n){
-    printf("Ingrese cuantos número desea agregar al arreglo: ");
-    scanf("%d", &n);
+void capturar(int arreglo[], int n){
     for(int i = 0; i < n; i ++){
         printf("\nIngrese el valor %i del arreglo: ", i + 1);
         scanf("%i", &arreglo[i]);
@@ -41,8 +39,11 @@ void archivo(int destino[], int j){
 int main()
 {
     int n = 0, j = 0;
+    printf("Ingrese cuantos numeros desea agregar al arreglo: ");
+    scanf("%d", &n);
     int array[n];
     int d[j];
+
 
     capturar(array, n);
     mostrar(array, n);
